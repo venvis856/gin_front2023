@@ -1,0 +1,39 @@
+.copy-down:hover {
+  color: #2252d6 !important;
+}
+.copy-down {
+  position: relative;
+}
+.suspend {
+  display: none;
+  position: absolute;
+  padding: 10px 20px;
+  z-index: 1;
+  color: #333;
+  font-size: 12px;
+  background: #fff;
+  text-align: justify;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.14);
+  z-index: 999;
+  word-break: keep-all;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.copy-down:hover .suspend {
+  display: block;
+}
+.suspend:before {
+  content: ' ';
+  width: 0;
+  height: 0;
+  top: -12px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}

@@ -1,0 +1,167 @@
+html, body, #root, .ant-layout {
+    width: 100%;
+    height: 100%;
+}
+/*table行距*/
+.ant-table-tbody > tr > td {
+    padding: 8px !important;
+    word-break: break-word !important;
+}
+
+/* antd 组件样式修改 */
+#components-layout-demo-custom-trigger .trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+    background: #fff;
+}
+
+/*菜单选中状态*/
+.ant-menu-item-selected{
+    /*background: #222d32 !important;*/
+    /*color: #fff !important;*/
+}
+
+/*  业务自定义 */
+.trigger{
+    margin: 0 24px;
+    color: #ffffff;
+}
+
+.side{
+    /*background-color: #222d32 !important;*/
+    height: 100%;
+}
+
+.side_header{
+    height:64px;
+    background-color:#357ca5;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom:1px solid #357ca5
+}
+
+.header_bg{
+    background-color: #3c8dbc !important;
+    padding: 0 !important;
+    display:flex;
+    border-bottom:1px solid #3c8dbc;
+}
+
+.nav_header_left_div{
+    flex:1;
+    display:flex;
+    justify-content:flex-start;
+}
+
+.nav_menu_div{
+    width: 100px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.nav_select_menu_div{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+/*.nav_menu{*/
+/*    border-bottom:0;*/
+/*    margin-left:50px;*/
+/*    background-color: #3c8dbc !important;*/
+/*    border-bottom:1px solid #3c8dbc !important;*/
+/*}*/
+
+/*.nav_menu_li{*/
+/*    width:100px;*/
+/*    text-align:center;*/
+/*    font-size:18px;*/
+/*    font-weight: bold;*/
+/*    height: 100%;*/
+/*    background-color: #3c8dbc !important;*/
+/*}*/
+
+.nav_right_person{
+    font-size:18px;
+    color:#fff;
+    margin-right: 20px;
+    /*font-weight: bold;*/
+}
+
+.nav_header_right{
+    flex:1;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.site_font{
+    font-size: 14px;
+}
+
+
+/* ckedit 调整 */
+.ck-editor__editable_inline {
+    min-height: 300px !important;
+}
+
+/* 列表搜索栏目 */
+.search_body{
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.search_item{
+    display: flex;
+    justify-content: left;
+    width: 230px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search_item_font{
+    height: 32px;
+    line-height: 32px;
+    width: 75px;
+    text-align: center;
+}
+
+.search_item_input{
+    width: 200px !important;
+}
+
+
+.operate_permission_div{
+    padding: 20px;
+    border-bottom: dotted 1px #807d7d;
+}
+
+.operate_permission_button_div{
+    height: 40px;
+    width: 100%;
+    padding: 20px 20px 50px 20px;
+    display: flex;
+}

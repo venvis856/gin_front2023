@@ -1,0 +1,196 @@
+import React, { useState } from 'react'
+import _ from 'lodash'
+import DragSort from './DragSort'
+
+let [width, height] = [400,100]
+const dataout = [
+{
+name: 'wangchong',
+sort: 1,
+code: '01',
+},
+{
+name: 'she',
+sort: 2,
+code: '02',
+},
+{
+name: 'kangkang',
+sort: 3,
+code: '03',
+},
+{
+name: 'machil',
+sort: 4,
+code: '04',
+},
+]
+const dragOverListout = [
+{
+name: 'wangchong',
+sort: 0,
+code: '00',
+},
+{
+name: 'll',
+sort: 0,
+code: '00',
+},
+{
+name: 'heifenglei',
+sort: 0,
+code: '00',
+},
+]
+let outdargItem = {}
+let dragStartIndex = null
+export default () => {
+let isDraging = false
+const [dialogVisible, setdialogVisible] = useState(false)
+const [dragEnter, setdragEnter] = useState(false)
+const [data, setData] = useState(dataout)
+const [dragOverList, setdragOverList] = useState(dragOverListout)
+const onDragStart = (ee, dragItem) => {
+outdargItem = dragItem
+isDraging = true
+}
+const onDrop = (ev) => {
+console.log('%c ev =========>', 'color:#722ed1;', ev)
+const copyData = JSON.parse(JSON.stringify(dragOverList))
+copyData.forEach((el, index) => {
+if (el.add) {
+copyData.splice(index + 1, 0, el.add)
+}
+delete el.add
+})
+setdragOverList(copyData)
+isDraging = false
+ev.preventDefault();
+}
+const onDragOver = (e) => {
+// console.log('%c e =========>', 'color:#722ed1;', e)
+e.preventDefault()
+}
+const onDrogEnd = () => {
+// console.log('%c isDraging =========>', 'color:#722ed1;', isDraging)
+setdragEnter(false)
+if (isDraging) setdialogVisible(false)
+}
+
+const onDragEnter = (e, el, index) => {
+e.preventDefault()
+e.stopPropagation()
+console.log('%c onDragEnter =========>', 'color:#722ed1;', index)
+dragOverList.forEach(el => {
+delete el.add
+})
+el.add = {...outdargItem}
+setdragOverList([...dragOverList])
+setdragEnter(true)
+}
+const onDragLeave = (e, index) => {
+// 使用relatedTarget 是否包含 target 来判断是移到了子元素还是移到了外部
+if (!e.relatedTarget || !e.relatedTarget.contains(e.target)) return
+console.log('%c onDragLeave =========>', 'color:#722ed1;', e, index)
+console.log('%c e.relatedTarget.caontains(e.) =========>', 'color:#722ed1;', e.relatedTarget.contains(e.target))
+dragOverList.forEach(el => {
+delete el.add
+})
+setdragOverList([...dragOverList])
+e.preventDefault()
+setdragEnter(false)
+}
+
+const newEl = {
+name: 'new',
+sort: 0,
+code: '00',
+}
+// return <DragSort/>
+return (
+
+<div>
+    <div>page2-2 -- 拖拽插入组件</div>
+    dragable
+    <div>
+        {data.map(el => (
+        <p style={{background: '#EBEDF3'}} draggable="true"
+        onDragEnd={e => onDrogEnd()}
+        onDragStart={e=> onDragStart(e, el)}>{el.name}</p>
+        ))}
+
+    </div>
+    drop
+    <div
+            style={{
+            width: `${width}px`,
+            height: `${height}px`,
+            overflow: 'auto',
+    padding: '10px 0',
+    background: '#EBEDF3',
+    zIndex: '1000',
+    }}
+    onDragEnter={e => onDragEnter(e, el, null)}
+    onDragLeave={e => onDragLeave(e)}
+    // onDragEnter={e => onDragEnter(e, dragOverList[dragOverList.length - 1])}
+    onDragOver={e => {
+    e.preventDefault()
+    // console.log('%c e =========>', 'color:#722ed1;', e)
+    }}
+    // onDrop={e => onDrop(e)}
+    >
+    {/* 放到el后面 的好处是 数据可控， 没有完全放入，有一个缓冲阶段， 但是不可以插入到头部 */}
+    {/* 直接修改数据的结果，可以在顶部加一个小小的块， 可以控制前插入的元素 */}
+    {
+    dragOverList.map((el, index) => (
+    <div
+            draggable="true"
+            onDragOver={e => {
+    e.preventDefault()
+    _.debounce(() => {
+    const move = (fromIndex, toIndex) => {
+    console.log('%c fromIndex, toIndex =========>', 'color:#722ed1;', fromIndex, toIndex)
+    let dragStartItem = dragOverList.splice(fromIndex, 1)[0]
+    dragOverList.splice(toIndex, 0, dragStartItem)
+    dragStartIndex = toIndex
+    setdragOverList([...dragOverList])
+    console.log('%cdragOverList  =========>', 'color:#722ed1;', dragOverList)
+    }
+    if((dragStartIndex === 0 || dragStartIndex) && dragStartIndex !== index) {
+    move(dragStartIndex, index)
+    }
+    console.log('%c onDragOver =========>', 'color:#722ed1;', e, el)
+    console.log('%c index =========>', 'color:#722ed1;', index, dragStartIndex)
+    }, 100)()
+    }}
+    onDragEnd={e => {
+    console.log('%c onDragEnd =========>', 'color:#722ed1;', )
+    dragStartIndex = null
+    }}
+    onDragStart={e=> {
+    dragStartIndex = index
+    el.type = 'move'
+    // e.preventDefault()
+    }}
+    onDragEnter={e => onDragEnter(e, el, index)}
+    onDrop={e => onDrop(e)}
+    onDragLeave={e => {
+    console.log('%c child onDragLeave =========>', 'color:#722ed1;', )
+    e.preventDefault()
+    e.stopPropagation()
+    }}
+    >
+    <div style={{background: '#fff', margin: '10px 0'}}>
+    {el.name}
+</div>
+{el.add && <div style={{background: '#fff', margin: '10px 0'}}>
+{el.add.name}
+</div>}
+</div>
+)
+)
+}
+</div>
+</div>
+)
+}

@@ -1,0 +1,21 @@
+/*  基层样式  */
+.flex_father{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.flex_child{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+
+
+/*  业务样式   */
+
+.flex_child.-width{
+    width: 250px;
+    background-color: #52c41a;
+}
