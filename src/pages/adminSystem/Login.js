@@ -16,12 +16,14 @@ function Login(props) {
     form.validateFields()
       .then(async (values) => {
         loginApi(values).then(res => {
+            // console.log(res, "res")
             if (res.code !== 0 || res.data === '') {
               message.error(`登录失败: ${res.msg}`);
               return;
             }
-            localStorageSet("token", res.data, +REACT_APP_CACHE_TIME)
-            localStorageSet("username", values.username, +REACT_APP_CACHE_TIME)
+            // console.log(res.data.userInfo,"====userinfo")
+            localStorageSet("token", res.data.token, 1000 * 60 * 60 * 3)
+            localStorageSet("userInfo", res.data.userInfo, 1000 * 60 * 60 * 3)
             message.success('登录成功!');
             props.history.push('/admin/user/list')
           }

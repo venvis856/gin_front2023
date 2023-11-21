@@ -217,7 +217,7 @@ function Index(props) {
             </Dropdown>
             <Dropdown overlay={() => menu(props)}>
               <a onClick={e => e.preventDefault()} className="nav_right_person">
-                {localStorageGet("username")} <DownOutlined/>
+                {localStorageGet("userInfo").username} <DownOutlined/>
               </a>
             </Dropdown>
           </div>
@@ -237,7 +237,7 @@ function Index(props) {
             backgroundColor: '#F0F2F5'
           }}
         >
-          <WaterMark content={`内部资料,请勿外传-${localStorageGet("username")}`}>
+          <WaterMark content={`内部资料,请勿外传-${localStorageGet("userInfo").username}`}>
             <ErrorBoundary>
               {props.children}
             </ErrorBoundary>
